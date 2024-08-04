@@ -18,7 +18,9 @@ magnitude for each pixel using the Sobel operator
 
 
 #### Input:
+![261878299-03428aab-2c2a-4676-8d84-3fdfff88decb](https://github.com/user-attachments/assets/eb967f9b-3632-46e1-8f44-df5dc5c0aa29)
 
 
 #### Output:
 
+![261878283-2277f790-136d-4d88-bd3d-9139b09c3fb1](https://github.com/user-attachments/assets/2dda503c-9a0e-41ad-8b20-2953240cfdfb)
