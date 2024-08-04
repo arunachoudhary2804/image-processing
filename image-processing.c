@@ -3,21 +3,6 @@
 #include <math.h>
 #include <string.h>
 
-// pgm.h
-#ifndef PGM_H
-#define PGM_H
-
-typedef struct {
-    char version[3];
-    int width;
-    int height;
-    int maxGrayLevel;
-    int **imageData;
-    int **gx;
-    int **gy;
-} pgm;
-
-#endif
 
 
 // Function to read a PGM file
@@ -78,6 +63,46 @@ void read_pgm_file(char* dir, pgm* image) {
 	printf("Version: %s \nWidth: %d \nHeight: %d \nMaximum Gray Level: %d \n", image->version, image->width, image->height, image->maxGrayLevel);
 }
 
+
+// Function to initialize the output image
+
+void init_out_image( pgm* out, pgm image){
+	int i, j;
+	strcpy(out->version, image.version); // Copy the version of the input image to the output image
+
+     // Copy the width and height of the input image to the output image
+	out->width = image.width;
+	out->height = image.height;
+    // Copy the maximum gray level of the input image to the output image
+	out->maxGrayLevel = image.maxGrayLevel;
+	
+    // Allocate memory for the image data of the output image
+	out->imageData = (int**) calloc(out->height, sizeof(int*));
+	for(i = 0; i < out->height; i++) {
+		out->imageData[i] = calloc(out->width, sizeof(int));
+	}
+	
+     // Allocate memory for the gradient in the X direction of the output image
+	out->gx = (int**) calloc(out->height, sizeof(int*));
+	for(i = 0; i < out->height; i++) {
+		out->gx[i] = calloc(out->width, sizeof(int));
+	}
+	
+    // Allocate memory for the gradient in the Y direction of the output image
+	out->gy = (int**) calloc(out->height, sizeof(int*));
+	for(i = 0; i < out->height; i++) {
+		out->gy[i] = calloc(out->width, sizeof(int));
+	}
+	
+    // Copy the image data of the input image to the output image
+	for(i = 0; i < out->height; i++) {
+		for(j = 0; j < out->width; j++) {
+			out->imageData[i][j] = image.imageData[i][j];
+			out->gx[i][j] = image.imageData[i][j];
+			out->gy[i][j] = image.imageData[i][j];
+		};
+	}
+}
 
 int main(int argc, char **argv)
 {
